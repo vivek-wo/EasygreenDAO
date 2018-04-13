@@ -36,7 +36,7 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).insertInTx(listObject.iterator());
+            ((AbstractDao<Object, String>) getDao(cls)).insertInTx(listObject);
         } else {
             cls = object.getClass();
             ((AbstractDao<Object, String>) getDao(cls)).insert(object);
@@ -52,7 +52,7 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).insertOrReplaceInTx(listObject.iterator());
+            ((AbstractDao<Object, String>) getDao(cls)).insertOrReplaceInTx(listObject);
         } else {
             cls = object.getClass();
             ((AbstractDao<Object, String>) getDao(cls)).insertOrReplace(object);
@@ -68,7 +68,7 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).updateInTx(listObject.iterator());
+            ((AbstractDao<Object, String>) getDao(cls)).updateInTx(listObject);
         } else {
             cls = object.getClass();
             ((AbstractDao<Object, String>) getDao(cls)).update(object);
@@ -84,7 +84,7 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).deleteInTx(listObject.iterator());
+            ((AbstractDao<Object, String>) getDao(cls)).deleteInTx(listObject);
         } else {
             cls = object.getClass();
             ((AbstractDao<Object, String>) getDao(cls)).delete(object);

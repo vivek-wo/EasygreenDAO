@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,8 +27,13 @@ public class MainActivity extends AppCompatActivity {
         mTaskLocalDataSource.deleteAll(User.class);
 
         User user = createUser("张三");
+        User user0 = createUser("李四");
+
+        List<User> list = new ArrayList<>();
+        list.add(user);
+        list.add(user0);
         //插入
-        mTaskLocalDataSource.insert(user);
+        mTaskLocalDataSource.insert(list);
 
         //查找
         List<User> userList = mTaskLocalDataSource.quaryAll(User.class);
