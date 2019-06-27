@@ -23,8 +23,8 @@ public class TaskLocalDataSource implements IDataSourceOperation {
         mDaoSession = daoMaster.newSession(IdentityScopeType.None);
     }
 
-    public <T> T getDao(Class<? extends Object> entityClass) {
-        return (T) mDaoSession.getDao(entityClass);
+    public AbstractDao<?, ?> getDao(Class<? extends Object> entityClass) {
+        return mDaoSession.getDao(entityClass);
     }
 
     @Override
@@ -36,10 +36,10 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).insertInTx(listObject);
+            getDao(cls).insertInTx(listObject);
         } else {
             cls = object.getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).insert(object);
+            getDao(cls).insert(object);
         }
     }
 
@@ -52,10 +52,10 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).insertOrReplaceInTx(listObject);
+            getDao(cls).insertOrReplaceInTx(listObject);
         } else {
             cls = object.getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).insertOrReplace(object);
+            getDao(cls).insertOrReplace(object);
         }
     }
 
@@ -68,10 +68,10 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).updateInTx(listObject);
+            getDao(cls).updateInTx(listObject);
         } else {
             cls = object.getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).update(object);
+            getDao(cls).update(object);
         }
     }
 
@@ -84,21 +84,21 @@ public class TaskLocalDataSource implements IDataSourceOperation {
                 throw new IllegalArgumentException("List Object Not Allow Empty!");
             }
             cls = listObject.get(0).getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).deleteInTx(listObject);
+            getDao(cls).deleteInTx(listObject);
         } else {
             cls = object.getClass();
-            ((AbstractDao<Object, String>) getDao(cls)).delete(object);
+            getDao(cls).delete(object);
         }
     }
 
     @Override
     public void deleteByKey(Class<?> cls, String key) {
-        ((AbstractDao<Object, String>) getDao(cls)).deleteByKey(key);
+        ((AbstractDao<?, String>) getDao(cls)).deleteByKey(key);
     }
 
     @Override
     public void deleteAll(Class<?> cls) {
-        ((AbstractDao<Object, String>) getDao(cls)).deleteAll();
+        getDao(cls).deleteAll();
     }
 
     @Override
